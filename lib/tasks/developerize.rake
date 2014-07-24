@@ -1,5 +1,5 @@
 namespace :developerize do
-  task :pull_data, [:local_db, :remote_db, :host] do |t, args|
+  task :pull_database, [:local_db, :remote_db, :host] do |t, args|
     local_db = args[:local_db] or fail('local_db must be given')
     remote_db = args[:remote_db] or fail('remote_db must be given')
     host = args[:host] or fail('host must be given')
