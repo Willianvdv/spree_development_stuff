@@ -13,4 +13,15 @@ namespace :developerize do
     puts '- Pull data from remote db'
     system "ssh #{host} 'pg_dump --no-owner #{remote_db}' | psql #{local_db} -h localhost"
   end
+
+  task payment_providers: :enviromnent do
+    Spree::PaymentMethod.all.each do |payment_method|
+      payment_method.environment = :development
+      payment_method.save!
+    end
+  end
+
+  task site: :environment do
+    Spree::Config.site_url = '0.0.0.0:3000'
+  end
 end
