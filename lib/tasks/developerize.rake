@@ -14,14 +14,14 @@ namespace :developerize do
     system "ssh #{host} 'pg_dump --no-owner #{remote_db}' | psql #{local_db} -h localhost"
   end
 
-  task payment_providers: :enviromnent do
+  task payment_providers: :environment do |t, args|
     Spree::PaymentMethod.all.each do |payment_method|
       payment_method.environment = :development
       payment_method.save!
     end
   end
 
-  task site: :environment do
+  task site: :environment do |t, args|
     Spree::Config.site_url = '0.0.0.0:3000'
   end
 end
